@@ -9,28 +9,28 @@ public class SliderVolumeMusic : MonoBehaviour
     [SerializeField] private string _audioMixerName;
 
     private Slider _volumeSlider;
-    private float value = 20f;
+    private int coefficient = 20;
     private float _startVolume = 0.5f;
 
     private void Awake()
     {
         _volumeSlider = GetComponent<Slider>();
-        _volumeSlider.onValueChanged.AddListener(VolumeChange);
+        _volumeSlider.onValueChanged.AddListener(ChangeValue);
     }
 
     private void Start()
     {
         _volumeSlider.value = _startVolume;
-        VolumeChange(_startVolume);
+        ChangeValue(_startVolume);
     }
 
     private void OnDestroy()
     {
-        _volumeSlider.onValueChanged.RemoveAllListeners();
+        _volumeSlider.onValueChanged.RemoveListener(ChangeValue);
     }
 
-    private void VolumeChange(float volume)
+    private void ChangeValue(float volume)
     {
-        _audioMixerGroup.audioMixer.SetFloat(_audioMixerName, Mathf.Log10(volume) * value);
+        _audioMixerGroup.audioMixer.SetFloat(_audioMixerName, Mathf.Log10(volume) * coefficient);
     }
 }

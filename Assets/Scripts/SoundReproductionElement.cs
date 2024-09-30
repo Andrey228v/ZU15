@@ -1,10 +1,8 @@
-using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using System;
 
-[RequireComponent(typeof(Button), typeof(AudioSource))]
-public class ButtonController : MonoBehaviour, IPointerUpHandler
+[RequireComponent(typeof(AudioSource))]
+public class SoundReproductionElement : MonoBehaviour, IPointerUpHandler
 {
     private AudioSource _audioSource;
 
